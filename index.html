@@ -119,61 +119,58 @@
       <hr />
 
     </div>
+
     <div class="container-fluid">
 
-      <div class="container-fluid">
+      <ul class="nav nav-tabs" id="tab-container" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#summary-content" role="tab"
+            >All Sfams</a>
+        </li>
+      </ul>
 
-        <ul class="nav nav-tabs" id="tab-container" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#summary-content" role="tab"
-              >All Sfams</a>
-          </li>
-        </ul>
-  
-        <div class="tab-content">
-  
-          <div class="tab-pane fade show active" id="summary-content" role="tabpanel">
-    
-            <h5 class="table-title">Summary of 383 superfamilies in CATH (v4.2) that may contain pseudoenzyme Functional Families (FunFams)</h5>
-            
-            <table id="pseudo-summary-table" class="table dataTables" width="100%">
-              <thead>
-                <tr>
-                  <th>Superfamily ID</th>
-                  <th>FunFams</th>
-                  <th>Sequences</th>
-                  <th>FunFams With Annotations</th>
-                  <th>FunFams Without Annotations</th>
-                  <th>Uniq EC</th>
-                  <th>Uniq GO</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Superfamily ID</th>
-                  <th>FunFams</th>
-                  <th>Sequences</th>
-                  <th>FunFams With Annotations</th>
-                  <th>FunFams Without Annotations</th>
-                  <th>Uniq EC</th>
-                  <th>Uniq GO</th>
-                  <th></th>
-                </tr>
-              </tfoot>
-            </table>
+      <div class="tab-content">
 
-          </div>
+        <div class="tab-pane fade show active" id="summary-content" role="tabpanel">
+  
+          <h5 class="table-title">Summary of 383 superfamilies in CATH (v4.2) that may contain pseudoenzyme Functional Families (FunFams)</h5>
+          
+          <table id="pseudo-summary-table" class="table dataTables" width="100%">
+            <thead>
+              <tr>
+                <th>Superfamily ID</th>
+                <th>FunFams</th>
+                <th>Sequences</th>
+                <th>FunFams With Annotations</th>
+                <th>FunFams Without Annotations</th>
+                <th>Uniq EC</th>
+                <th>Uniq GO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Superfamily ID</th>
+                <th>FunFams</th>
+                <th>Sequences</th>
+                <th>FunFams With Annotations</th>
+                <th>FunFams Without Annotations</th>
+                <th>Uniq EC</th>
+                <th>Uniq GO</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+
         </div>
-  
       </div>
+  
     </div>
 
-
-    <div id="sfam-detail-modal" class="modal modal-lg" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg" role="document">
+    <div id="sfam-detail-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog mw-100 w-75" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Title</h5>
@@ -182,28 +179,30 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="container-fluid">
-              <table id="sfam-detail-table" class="table dataTables" width="100%">
-                <thead>
+            <table id="sfam-detail-table" class="table dataTables" width="100%">
+              <thead>
+                <tr>
                   <th>FunFam ID</th>
                   <th>Sequences</th>
                   <th># EC</th>
                   <th>EC</th>
                   <th># GO</th>
                   <th>GO</th>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+              <tfoot>
+                <tr>
                   <th>FunFam ID</th>
                   <th>Sequences</th>
                   <th># EC</th>
                   <th>EC</th>
                   <th># GO</th>
                   <th>GO</th>
-                </tfoot>
-              </table>
-            </div>
+                </tr>
+              </tfoot>
+            </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -242,36 +241,13 @@ $(document).ready(function() {
     return colors[n % colors.length];
   }
 
-  dt_dom = '<"dt-actions"B>lfrtip'
+  dt_dom = '<"row"<"col-sm-6"l><"col-sm-6"B>><"row"<"col-sm-6"i><"col-sm-6"f>>tip'
   dt_buttons = ['copy', 'csv']
-
-
-/*
-  my @funfam_data = map {
-        my $ff_id = $_;
-        {
-            funfam_id => $ff_id,
-            seq_count => $acc_by_funfam{$ff_id},
-            uniq_ec => [ uniq sort keys %{$ec_by_funfam{$ff_id}} ],
-            uniq_go => [ uniq sort map { sprintf("%s: %s", $_->{go_acc}, $_->{name}) } values %{$go_by_funfam{$ff_id}} ],
-        }
-    } keys %acc_by_funfam;
-    
-    my %sfam_data = (
-        sfam_id => $superfamily_id,
-        funfam_count => (scalar keys %acc_by_funfam),
-        funfam_seq_count => (sum values %acc_by_funfam),
-        empty_count => $anno_empty_count,
-        non_empty_count => $anno_nonempty_count,
-        sfam_uniq_ec_count => scalar( uniq map { keys %$_ } (values %ec_by_funfam) ),
-        sfam_uniq_go_count => scalar( uniq map { keys %$_ } (values %go_by_funfam) ),
-        funfam_data => \@funfam_data,
-    );
-*/
     
   var summary_table = $('#pseudo-summary-table').DataTable( {
     "dom": dt_dom,
     "buttons": dt_buttons,
+    "pageLength": 25,
     "columns": [
       { "data": "sfam_id" },
       { "data": "funfam_count" },
@@ -314,6 +290,7 @@ $(document).ready(function() {
   var details_table = $('#sfam-detail-table').DataTable({
     "dom": dt_dom,
     "buttons": dt_buttons,
+    "pageLength": 25,
     "columns": [
       { "data": "funfam_id" },
       { "data": "seq" },
@@ -323,6 +300,14 @@ $(document).ready(function() {
       { "data": "go" },
     ],
     "columnDefs": [
+      {
+        "targets": 0,
+        "render": function(ff_id) {
+          var ff_parts = ff_id.split('-');
+          var sfam_id = ff_parts[0], ff_num = ff_parts[2];
+          return '<a href="http://www.cathdb.info/superfamily/' + sfam_id + '/funfam/' + ff_num + '" target="_blank">' + ff_id + '</a>'
+        },
+      },
       {
         "targets": [2],
         "render": function(arr) { return arr.length == 0 ? '-' : '<span class="badge badge-ec">' + arr.length + '</span>' },
@@ -344,13 +329,11 @@ $(document).ready(function() {
   $('#loading').html('Loading data ...');
   $.get( base_url + "/data/stats.v4_2_0.json", function(data) {
     $('#loading').html('');
-    console.log('Loading.data: ', data);
     var row_data = data['data'];
     row_data.forEach(function(sfam_data) {
       var sfam_id = sfam_data['sfam_id'];
       data_by_sfam[sfam_id] = sfam_data;
     });
-    console.log('Loading.data_by_sfam: ', data_by_sfam);
     summary_table.clear();
     summary_table.rows.add(row_data);
     summary_table.draw();
@@ -366,9 +349,6 @@ $(document).ready(function() {
     var funfam_data = sfam_data['funfam_data']
 
     modal.find('.modal-title').text('Superfamily: ' + sfam_id );
-
-    console.log("funfam_data: ", funfam_data);
-
     details_table.clear();
     details_table.rows.add(funfam_data);
     details_table.draw();

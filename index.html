@@ -1,208 +1,132 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
-    <!-- dataTables --> 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.css"/>
-    
-    <!-- Le styles -->
-    <link href="bootstrap-4.1.3-dist/css/bootstrap.css" rel="stylesheet">
-    <style>
-      .tab-content {
-        margin: 20px;
-      }
-      .table-title {
-        margin-bottom: 30px;
-      }
-      .table {
-        font-size: 0.8em;
-        width: 100%;
-      }
-      .badge-lg {
-        font-size: 1.2em;
-        margin: 0 0.1em 0.1em 0;
-      }
-      .dt-actions {
-        margin-bottom: 0.5em;
-      }
-      .badge-ec, .badge-go {
-        color: white;
-        font-size: 0.75rem;
-      }
-      .badge-ec {
-        background-color: #28a745;
-      }
-      .badge-go {
-        background-color: #17a2b8;
-      }
-    </style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CATH Pseudoenzymes: a domain-based approach to identify possible pseudoenzymes</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- dataTables -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.css" />
 
-    <!-- DataTables -->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.js"></script>
+  <!-- Le styles -->
+  <link href="bootstrap-4.1.3-dist/css/bootstrap.css" rel="stylesheet">
+  <style>
+    .tab-content {
+      margin: 20px;
+    }
 
-  </head>
-  
-  <body>
-    <div class="container">
+    .table-title {
+      margin-bottom: 30px;
+    }
 
-      <hr /> 
-      <div class="page-header">
-          <h2>
-              A domain-based approach to identify possible pseudoenzymes in CATH
-          </h2>
-          <h5>Ribeiro <i> et al </i> 2019 (paper submitted)</h5>
-      </div>
-      <hr />
+    .table {
+      font-size: 0.8em;
+      width: 100%;
+    }
 
-      <p>
-        We examined 383 enzyme superfamilies in CATH/Gene 3D v4.2 that contain well-known (experimentally-validated) 
-        catalytic domains, and identified the proportion of functional families that have enzyme annotations and compared 
-        them to those that lack any enzyme annotation. These are highly populated superfamilies accounting for 64% of sequences 
-        in all CATH enzyme superfamilies and 60% of all sequences in CATH.
-      </p>
-      <p>A functional family was considered to have enzyme annotations if it has at least one relative that has an EC annotation 
-        in UniProtKB and an experimental Gene Ontology (GO) annotation for ‘catalytic activity’. For a third of these enzyme 
-        superfamilies, all functional families were annotated as enzymes. However, approximately 252 enzyme superfamilies 
-        (two-thirds) had varying proportions of functional families that had no enzyme annotations in the EC classification or GO, 
-        suggesting that these are very likely to be pseudoenzymes.
-      </p>
+    .badge-lg {
+      font-size: 1.2em;
+      margin: 0 0.1em 0.1em 0;
+    }
 
-      <hr />
+    .dt-actions {
+      margin-bottom: 0.5em;
+    }
 
-      <div class="">
-        <button class="btn btn-light" data-toggle="modal" data-target="#filter-faq1-modal"
-          >How do we identify pseudoenzymes?</button>
-      </div>
+    .badge-ec,
+    .badge-go {
+      color: white;
+      font-size: 0.75rem;
+    }
 
-      <div id="filter-faq1-modal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Identifying pseudoenzymes</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Putative pseudoenzymes have been predicted within 252 CATH superfamilies. 
-                Functional families with zero EC terms (and zero GO terms describing catalytic activity) 
-                were identified within enzyme CATH superfamilies with experimentally-validated catalytic domains, 
-                suggesting that these families are very likely to be potential pseudoenzymes. 
-                Please note that these predictions will need to be experimentally validated to confirm 
-                that they are indeed pseudoenzymes.
-                </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <hr />
+    .badge-ec {
+      background-color: #28a745;
+    }
 
+    .badge-go {
+      background-color: #17a2b8;
+    }
+  </style>
+
+  <title>CATH Pseudoenzymes: a domain-based approach to identify possible pseudoenzymes</title>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <!-- DataTables -->
+  <script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <hr />
+    <div class="page-header">
+      <h2>
+        A domain-based approach to identify possible pseudoenzymes in CATH
+      </h2>
+      <h5>Ribeiro <i> et al </i> 2019 (paper submitted)</h5>
+    </div>
+    <hr />
+
+    <p>
+      We examined 383 enzyme superfamilies in CATH/Gene 3D v4.2 that contain well-known (experimentally-validated)
+      catalytic domains, and identified the proportion of functional families that have enzyme annotations and compared
+      them to those that lack any enzyme annotation. These are highly populated superfamilies accounting for 64% of
+      sequences
+      in all CATH enzyme superfamilies and 60% of all sequences in CATH.
+    </p>
+    <p>A functional family was considered to have enzyme annotations if it has at least one relative that has an EC
+      annotation
+      in UniProtKB and an experimental Gene Ontology (GO) annotation for ‘catalytic activity’. For a third of these
+      enzyme
+      superfamilies, all functional families were annotated as enzymes. However, approximately 252 enzyme superfamilies
+      (two-thirds) had varying proportions of functional families that had no enzyme annotations in the EC
+      classification or GO,
+      suggesting that these are very likely to be pseudoenzymes.
+    </p>
+
+    <hr />
+
+    <div class="">
+        <button class="btn btn-light" data-toggle="modal" data-target="#filter-faq2-modal">What is a Superfamily ID?</button>
+        <button class="btn btn-light" data-toggle="modal" data-target="#filter-faq1-modal">How do we identify
+        pseudoenzymes?</button>
     </div>
 
-    <div class="container-fluid">
-
-      <ul class="nav nav-tabs" id="tab-container" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#summary-content" role="tab"
-            >All Sfams</a>
-        </li>
-      </ul>
-
-      <div class="tab-content">
-
-        <div class="tab-pane fade show active" id="summary-content" role="tabpanel">
-  
-          <h5 class="table-title">Summary of 383 superfamilies in CATH (v4.2) that may contain pseudoenzyme Functional Families (FunFams)</h5>
-          
-          <table id="pseudo-summary-table" class="table dataTables" width="100%">
-            <thead>
-              <tr>
-                <th>Superfamily ID</th>
-                <th>FunFams</th>
-                <th>Sequences</th>
-                <th>FunFams With Annotations</th>
-                <th>FunFams Without Annotations</th>
-                <th>Uniq EC</th>
-                <th>Uniq GO</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Superfamily ID</th>
-                <th>FunFams</th>
-                <th>Sequences</th>
-                <th>FunFams With Annotations</th>
-                <th>FunFams Without Annotations</th>
-                <th>Uniq EC</th>
-                <th>Uniq GO</th>
-                <th></th>
-              </tr>
-            </tfoot>
-          </table>
-
-        </div>
-      </div>
-  
-    </div>
-
-    <div id="sfam-detail-modal" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog mw-100 w-75" role="document">
+    <div id="filter-faq1-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Title</h5>
+            <h5 class="modal-title">Identifying pseudoenzymes</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <table id="sfam-detail-table" class="table dataTables" width="100%">
-              <thead>
-                <tr>
-                  <th>FunFam ID</th>
-                  <th>Sequences</th>
-                  <th># EC</th>
-                  <th>EC</th>
-                  <th># GO</th>
-                  <th>GO</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>FunFam ID</th>
-                  <th>Sequences</th>
-                  <th># EC</th>
-                  <th>EC</th>
-                  <th># GO</th>
-                  <th>GO</th>
-                </tr>
-              </tfoot>
-            </table>
+            <p>Putative pseudoenzymes have been predicted within 252 CATH superfamilies.
+              Functional families with zero EC terms (and zero GO terms describing catalytic activity)
+              were identified within enzyme CATH superfamilies with experimentally-validated catalytic domains,
+              suggesting that these families are very likely to be potential pseudoenzymes.
+              Please note that these predictions will need to be experimentally validated to confirm
+              that they are indeed pseudoenzymes.
+            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -211,154 +135,296 @@
       </div>
     </div>
 
+    <div id="filter-faq2-modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">CATH Database</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>The CATH database is a hierarchical domain classification of protein structures in the Protein Data Bank.
+              Protein structures are classified using a combination of automated and manual procedures. There are four
+              major levels in this hierarchy:
 
-    <script>
+            <ul>
+              <li>
+                <strong>Class</strong> - structures are classified according to their secondary structure composition (mostly alpha,
+                mostly beta, mixed alpha/beta or few secondary structures).
+              </li>
+              <li>
+                <strong>Architecture</strong> - structures are classified according to their overall shape as determined by the
+                orientations of the secondary structures in 3D space but ignores the connectivity between them.
+              </li>
+              <li>
+                <strong>Topology</strong> (fold family) - structures are grouped into fold groups at this level depending on both the
+                overall shape and connectivity of the secondary structures.
+              </li>
+              <li>
+                <strong>Homologous superfamily</strong> - this level groups together protein domains which are thought to share a common
+                ancestor and can therefore be described as homologous.
+              </li>
+            </ul>
+            </p>
+            <p>
+              Each level of the hierarchy is given a numeric identifier so the identifier for a superfamily would look like "C.A.T.H" 
+              (eg. "1.10.10.10" is the identifier for the CATH superfamily
+              <a href="http://www.cathdb.info/version/latest/superfamily/1.10.10.10" target="_blank">"Winged helix-like DNA-binding domain superfamily"</a>)
+            </p>
 
-$(document).ready(function() {
-//  var base_url = 'http://localhost:8080/';
-  var base_url = 'https://uclorengogroup.github.io/cath-pseudoenzymes/';
-//  'https://raw.githubusercontent.com/UCLOrengoGroup/cath-pseudoenzyme.github.io/master'              
 
-  var data_by_sfam = [];
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  function hex_to_rgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  }
+    <hr />
 
-  function is_dark(c) {
-    rgb = hex_to_rgb(c);
-    rgb_av = (rgb.r + rgb.g + rgb.b) / 3;
-    return rgb_av < (256/2);
-  }
+  </div>
 
-  function get_color(n) {
-    var colors = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
-    return colors[n % colors.length];
-  }
+  <div class="container-fluid">
 
-  dt_dom = '<"row"<"col-sm-6"l><"col-sm-6"B>><"row"<"col-sm-6"i><"col-sm-6"f>>tip'
-  dt_buttons = ['copy', 'csv']
-    
-  var summary_table = $('#pseudo-summary-table').DataTable( {
-    "dom": dt_dom,
-    "buttons": dt_buttons,
-    "pageLength": 25,
-    "columns": [
-      { "data": "sfam_id" },
-      { "data": "funfam_count" },
-      { "data": "funfam_seq_count" },
-      { "data": "non_empty_count" },
-      { "data": "empty_count" },
-      { "data": "sfam_uniq_ec_count" },
-      { "data": "sfam_uniq_go_count" },
-      {
-        "className": 'details-control',
-        "orderable": false,
-        "data": "sfam_id",
-        "defaultContent": "",
-      },
-    ],
-    "columnDefs": [
-      {
-        "targets": 0,
-        "render": function(sfam_id) {
-          return '<a href="http://www.cathdb.info/superfamily/' + sfam_id + '" target="_blank">' + sfam_id + '</a>'
-        },
-      },
-      {
-        "targets": 5,
-        "render": function(count) { return count == 0 ? '-' : '<span class="badge badge-ec">' + count + '</span>' },
-      },
-      {
-        "targets": 6,
-        "render": function(count) { return count == 0 ? '-' : '<span class="badge badge-go">' + count + '</span>' },
-      },
-      {
-        "targets": 7,
-        "render": function(sfam_id) {
-          return '<button class="btn btn-primary" data-toggle="modal" data-sfam-id="'+sfam_id+'" data-target="#sfam-detail-modal">Details</button>';
-        },
+    <ul class="nav nav-tabs" id="tab-container" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#summary-content" role="tab">All Sfams</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div class="tab-pane fade show active" id="summary-content" role="tabpanel">
+
+        <h5 class="table-title">Summary of 383 superfamilies in CATH (v4.2) that may contain pseudoenzyme Functional
+          Families (FunFams)</h5>
+
+        <table id="pseudo-summary-table" class="table dataTables" width="100%">
+          <thead>
+            <tr>
+              <th>Superfamily ID</th>
+              <th>FunFams</th>
+              <th>Sequences</th>
+              <th>FunFams With Annotations</th>
+              <th>FunFams Without Annotations</th>
+              <th>Uniq EC</th>
+              <th>Uniq GO</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Superfamily ID</th>
+              <th>FunFams</th>
+              <th>Sequences</th>
+              <th>FunFams With Annotations</th>
+              <th>FunFams Without Annotations</th>
+              <th>Uniq EC</th>
+              <th>Uniq GO</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div id="sfam-detail-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog mw-100 w-75" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table id="sfam-detail-table" class="table dataTables" width="100%">
+            <thead>
+              <tr>
+                <th>FunFam ID</th>
+                <th>Sequences</th>
+                <th># EC</th>
+                <th>EC</th>
+                <th># GO</th>
+                <th>GO</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>FunFam ID</th>
+                <th>Sequences</th>
+                <th># EC</th>
+                <th>EC</th>
+                <th># GO</th>
+                <th>GO</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    $(document).ready(function () {
+      //  var base_url = 'http://localhost:8080/';
+      var base_url = 'https://uclorengogroup.github.io/cath-pseudoenzymes/';
+      //  'https://raw.githubusercontent.com/UCLOrengoGroup/cath-pseudoenzyme.github.io/master'              
+
+      var data_by_sfam = [];
+
+      function hex_to_rgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
       }
-    ]
-  });
 
-  var details_table = $('#sfam-detail-table').DataTable({
-    "dom": dt_dom,
-    "buttons": dt_buttons,
-    "pageLength": 25,
-    "columns": [
-      { "data": "funfam_id" },
-      { "data": "seq" },
-      { "data": "ec", defaultContent: "" },
-      { "data": "ec" },
-      { "data": "go", defaultContent: "" },
-      { "data": "go" },
-    ],
-    "columnDefs": [
-      {
-        "targets": 0,
-        "render": function(ff_id) {
-          var ff_parts = ff_id.split('-');
-          var sfam_id = ff_parts[0], ff_num = ff_parts[2];
-          return '<a href="http://www.cathdb.info/superfamily/' + sfam_id + '/funfam/' + ff_num + '" target="_blank">' + ff_id + '</a>'
-        },
-      },
-      {
-        "targets": [2],
-        "render": function(arr) { return arr.length == 0 ? '-' : '<span class="badge badge-ec">' + arr.length + '</span>' },
-      },
-      {
-        "targets": [4],
-        "render": function(arr) { return arr.length == 0 ? '-' : '<span class="badge badge-go">' + arr.length + '</span>' },
-      },
-      {
-        "targets": [3, 5],
-        "render": function(arr) { 
-          return '<ul>' + arr.map(function(id) { return '<li>' + id + '</li>' }).join('') + '</ul>';
-        },
-      },
-    ]
-  });
+      function is_dark(c) {
+        rgb = hex_to_rgb(c);
+        rgb_av = (rgb.r + rgb.g + rgb.b) / 3;
+        return rgb_av < (256 / 2);
+      }
+
+      function get_color(n) {
+        var colors = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+        return colors[n % colors.length];
+      }
+
+      dt_dom = '<"row"<"col-sm-6"l><"col-sm-6"B>><"row"<"col-sm-6"i><"col-sm-6"f>>tip'
+      dt_buttons = ['copy', 'csv']
+
+      var summary_table = $('#pseudo-summary-table').DataTable({
+        "dom": dt_dom,
+        "buttons": dt_buttons,
+        "pageLength": 25,
+        "columns": [
+          { "data": "sfam_id" },
+          { "data": "funfam_count" },
+          { "data": "funfam_seq_count" },
+          { "data": "non_empty_count" },
+          { "data": "empty_count" },
+          { "data": "sfam_uniq_ec_count" },
+          { "data": "sfam_uniq_go_count" },
+          {
+            "className": 'details-control',
+            "orderable": false,
+            "data": "sfam_id",
+            "defaultContent": "",
+          },
+        ],
+        "columnDefs": [
+          {
+            "targets": 0,
+            "render": function (sfam_id) {
+              return '<a href="http://www.cathdb.info/superfamily/' + sfam_id + '" target="_blank">' + sfam_id + '</a>'
+            },
+          },
+          {
+            "targets": 5,
+            "render": function (count) { return count == 0 ? '-' : '<span class="badge badge-ec">' + count + '</span>' },
+          },
+          {
+            "targets": 6,
+            "render": function (count) { return count == 0 ? '-' : '<span class="badge badge-go">' + count + '</span>' },
+          },
+          {
+            "targets": 7,
+            "render": function (sfam_id) {
+              return '<button class="btn btn-primary" data-toggle="modal" data-sfam-id="' + sfam_id + '" data-target="#sfam-detail-modal">Details</button>';
+            },
+          }
+        ]
+      });
+
+      var details_table = $('#sfam-detail-table').DataTable({
+        "dom": dt_dom,
+        "buttons": dt_buttons,
+        "pageLength": 25,
+        "columns": [
+          { "data": "funfam_id" },
+          { "data": "seq" },
+          { "data": "ec", defaultContent: "" },
+          { "data": "ec" },
+          { "data": "go", defaultContent: "" },
+          { "data": "go" },
+        ],
+        "columnDefs": [
+          {
+            "targets": 0,
+            "render": function (ff_id) {
+              var ff_parts = ff_id.split('-');
+              var sfam_id = ff_parts[0], ff_num = ff_parts[2];
+              return '<a href="http://www.cathdb.info/superfamily/' + sfam_id + '/funfam/' + ff_num + '" target="_blank">' + ff_id + '</a>'
+            },
+          },
+          {
+            "targets": [2],
+            "render": function (arr) { return arr.length == 0 ? '-' : '<span class="badge badge-ec">' + arr.length + '</span>' },
+          },
+          {
+            "targets": [4],
+            "render": function (arr) { return arr.length == 0 ? '-' : '<span class="badge badge-go">' + arr.length + '</span>' },
+          },
+          {
+            "targets": [3, 5],
+            "render": function (arr) {
+              return '<ul>' + arr.map(function (id) { return '<li>' + id + '</li>' }).join('') + '</ul>';
+            },
+          },
+        ]
+      });
 
 
-  $('#loading').html('Loading data ...');
-  $.get( base_url + "/data/stats.v4_2_0.json", function(data) {
-    $('#loading').html('');
-    var row_data = data['data'];
-    row_data.forEach(function(sfam_data) {
-      var sfam_id = sfam_data['sfam_id'];
-      data_by_sfam[sfam_id] = sfam_data;
+      $('#loading').html('Loading data ...');
+      $.get(base_url + "/data/stats.v4_2_0.json", function (data) {
+        $('#loading').html('');
+        var row_data = data['data'];
+        row_data.forEach(function (sfam_data) {
+          var sfam_id = sfam_data['sfam_id'];
+          data_by_sfam[sfam_id] = sfam_data;
+        });
+        summary_table.clear();
+        summary_table.rows.add(row_data);
+        summary_table.draw();
+      });
+
+      $('#sfam-detail-modal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var sfam_id = button.data('sfamId');
+        var modal = $(this);
+
+        var sfam_data = data_by_sfam[sfam_id];
+        var funfam_data = sfam_data['funfam_data']
+
+        modal.find('.modal-title').text('Superfamily: ' + sfam_id);
+        details_table.clear();
+        details_table.rows.add(funfam_data);
+        details_table.draw();
+      });
+
     });
-    summary_table.clear();
-    summary_table.rows.add(row_data);
-    summary_table.draw();
-  });
 
-  $('#sfam-detail-modal').on('show.bs.modal', function(event) {
+  </script>
 
-    var button = $(event.relatedTarget);
-    var sfam_id = button.data('sfamId');
-    var modal = $(this);
+</body>
 
-    var sfam_data = data_by_sfam[sfam_id];
-    var funfam_data = sfam_data['funfam_data']
-
-    modal.find('.modal-title').text('Superfamily: ' + sfam_id );
-    details_table.clear();
-    details_table.rows.add(funfam_data);
-    details_table.draw();
-  });
-
-});
-
-    </script> 
-
-  </body>
 </html>
-
-
